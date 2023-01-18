@@ -1,5 +1,6 @@
 
 
+
 export const preCalculateNode = (node) => {
     const iconSize=24;
     const icon='node';
