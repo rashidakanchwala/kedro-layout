@@ -16,6 +16,8 @@ const newNodes = data.nodes.map(node => (preCalculateNode(node)));
 
 output = graphNew({ nodes: newNodes, edges: data.edges})
 
+console.log(output.nodes)
+
 function App() {
 
 
@@ -31,20 +33,50 @@ function App() {
   return (
     <svg
       style={{margin: "0 auto", display: "block"}}
-      width={output.size.width*0.5}
+      width={output.size.width}
       height={output.size.height*0.5}
       viewBox={`0 0 ${output.size.width} ${output.size.height}`}
     >
-      <g>
-        {output.nodes.map((n) => (
-          <circle r={20} cx={n.x} cy={n.y} fill="red" />
+        {output.nodes.map((node) => (
+          <g>
+          <rect 
+             x={node.x - node.width/2} 
+             y={node.y - node.height/2} 
+             width = {node.width}
+             height = {node.height}
+             fillOpacity={0.2}>
+          </rect>
+          <text
+            textAnchor='middle'
+            y={node.y}
+            x={node.x}
+            dy={5}
+          >
+            {node.full_name}
+          </text>
+          </g>
         ))}
-      </g>
       <g>
+      <defs>
+        <marker
+          id={"arrow"}
+          key={"arrow"}
+          viewBox="0 0 10 10"
+          refX="7"
+          refY="5"
+          markerUnits="strokeWidth"
+          markerWidth="8"
+          markerHeight="6"
+          orient="auto"
+        >
+          <path d="M 0 0 L 10 5 L 0 10 L 4 5 z" />
+        </marker>
+            </defs>
         {output.edges.map((edge) => (
           <path d = {drawEdge(edge)}
             stroke='black'
-            fill='none'>
+            fill='none'
+            markerEnd='url(#arrow)'>
             </path>
   
         ))}
