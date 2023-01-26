@@ -1,6 +1,6 @@
 import logo from './logo.svg'
 import './App.css'
-import { graphNew } from './graph'
+import { graphNew } from '@quantumblack/kedro-viz-flowchart'
 import data from './graph/test-data.json'
 import { useEffect } from 'react'
 import { preCalculateNode } from './precalculation'
@@ -11,15 +11,15 @@ let output = {};
 
 
 
-const newNodes = data.nodes.map(node => (preCalculateNode(node)));
+// const newNodes = data.nodes.map(node => (preCalculateNode(node)));
 
 
-output = graphNew({ nodes: newNodes, edges: data.edges})
-
-console.log(output.nodes)
+output = graphNew({ nodes: data.nodes, edges: data.edges})
 
 function App() {
 
+
+  console.log(output.nodes)
 
   const lineShape = line()
   .x((d) => d.x)

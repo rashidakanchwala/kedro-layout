@@ -8,7 +8,8 @@
       "pipelines": ["dp", "__default__"],
       "type": "task",
       "modular_pipelines": ["data_processing"],
-      "parameters": {}
+      "parameters": {},
+      "status": "IN PROGRESS"
     },
     {
       "id": "f192326a",
@@ -19,7 +20,8 @@
       "type": "data",
       "modular_pipelines": ["data_processing"],
       "layer": "raw",
-      "dataset_type": "pandas.excel_dataset.ExcelDataSet"
+      "dataset_type": "pandas.excel_dataset.ExcelDataSet",
+      "status": "IN PROGRESS"
     },
     {
       "id": "e5a9ec27",
