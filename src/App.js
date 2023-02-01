@@ -1,88 +1,68 @@
-import logo from './logo.svg'
-import './App.css'
-import { graphNew } from '@quantumblack/kedro-viz-flowchart'
-import data from './graph/test-data.json'
-import { useEffect } from 'react'
-import { preCalculateNode } from './precalculation'
-import { curveBasis, line } from 'd3-shape';
-import { isCompositeComponent } from 'react-dom/test-utils'
+import "./App.css";
+import { graphNew } from "@quantumblack/kedro-viz/lib/utils/graph";
+import data from "./graph/test-data.json";
+import { curveBasis, line } from "d3-shape";
 
-let output = {};
-
-
-
-// const newNodes = data.nodes.map(node => (preCalculateNode(node)));
-
-
-output = graphNew({ nodes: data.nodes, edges: data.edges})
+const output = graphNew({ nodes: data.nodes, edges: data.edges });
 
 function App() {
-
-
-  console.log(output.nodes)
-
   const lineShape = line()
-  .x((d) => d.x)
-  .y((d) => d.y)
-  .curve(curveBasis);
+    .x((d) => d.x)
+    .y((d) => d.y)
+    .curve(curveBasis);
 
-  const drawEdge = function(edge) {
-    return(lineShape(edge.points))
-  }
+  const drawEdge = function (edge) {
+    return lineShape(edge.points);
+  };
 
   return (
     <svg
-      style={{margin: "0 auto", display: "block"}}
+      style={{ margin: "0 auto", display: "block" }}
       width={output.size.width}
-      height={output.size.height*0.5}
+      height={output.size.height * 0.5}
       viewBox={`0 0 ${output.size.width} ${output.size.height}`}
     >
-        {output.nodes.map((node) => (
-          <g>
-          <rect 
-             x={node.x - node.width/2} 
-             y={node.y - node.height/2} 
-             width = {node.width}
-             height = {node.height}
-             fillOpacity={0.2}>
-          </rect>
-          <text
-            textAnchor='middle'
-            y={node.y}
-            x={node.x}
-            dy={5}
-          >
+      {output.nodes.map((node) => (
+        <g>
+          <rect
+            x={node.x - node.width / 2}
+            y={node.y - node.height / 2}
+            width={node.width}
+            height={node.height}
+            fillOpacity={0.2}
+          ></rect>
+          <text textAnchor="middle" y={node.y} x={node.x} dy={5}>
             {node.full_name}
           </text>
-          </g>
-        ))}
+        </g>
+      ))}
       <g>
-      <defs>
-        <marker
-          id={"arrow"}
-          key={"arrow"}
-          viewBox="0 0 10 10"
-          refX="7"
-          refY="5"
-          markerUnits="strokeWidth"
-          markerWidth="8"
-          markerHeight="6"
-          orient="auto"
-        >
-          <path d="M 0 0 L 10 5 L 0 10 L 4 5 z" />
-        </marker>
-            </defs>
+        <defs>
+          <marker
+            id={"arrow"}
+            key={"arrow"}
+            viewBox="0 0 10 10"
+            refX="7"
+            refY="5"
+            markerUnits="strokeWidth"
+            markerWidth="8"
+            markerHeight="6"
+            orient="auto"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 L 4 5 z" />
+          </marker>
+        </defs>
         {output.edges.map((edge) => (
-          <path d = {drawEdge(edge)}
-            stroke='black'
-            fill='none'
-            markerEnd='url(#arrow)'>
-            </path>
-  
+          <path
+            d={drawEdge(edge)}
+            stroke="black"
+            fill="none"
+            markerEnd="url(#arrow)"
+          ></path>
         ))}
       </g>
     </svg>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@lume/kiwi": "^0.1.0",
+    "@quantumblack/kedro-viz": "^5.2.1",
     "@quantumblack/kedro-viz-flowchart": "file:../../kedro-viz/lib/utils/graph",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
